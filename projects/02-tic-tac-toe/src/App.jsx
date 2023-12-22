@@ -4,35 +4,56 @@ import "./index.css";
 
 const TURNS = {
   X: "x",
-  0: "o",
+  O: "o",
 };
 
+const Square = ({ children, isSelected, updateBoard, index }) => {
+  const className = `square ${isSelected && "is-selected"}`;
 
+  const handleClick = () => {
+    updateBoard(index)
+  }
 
-const Square = ({ children, updateBoard, index }) => {
-  return <div className="square">{children}</div>;
+  return (
+    <div onClick={handleClick} className={className}>
+      {children}
+    </div>
+  );
 };
 
 function App() {
-  let dummy  = ['x', 'o', 'o', 'x', 'o', 'x', 'x', 'o', 'o']
-  const [board, setBoard] = useState(dummy)
-  // const [board, setBoard] = useState(Array(9).fill(null))
-  console.log(board);
-  
+  const [board, setBoard] = useState(Array(9).fill(null));
+  const [turn, setTurn] = useState(TURNS.X);
+
+  const updateBoard = (index) => {
+    const newBoard = [...board]
+    newBoard[index] = turn
+    setBoard(newBoard)
+
+    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
+    setTurn(newTurn)
+  };
+
   return (
     <main className="board">
       <h1>Tic tac toe</h1>
       <section className="game">
         {board.map((_, index) => {
           return (
-            <Square key={index} index={index}>
+            <Square key={index} index={index} updateBoard={updateBoard}>
               {board[index]}
             </Square>
           );
         })}
+      </section>
+      <section className="turn">
+        <Square isSelected={turn === TURNS.X}>{TURNS.X}</Square>
+        <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
       </section>
     </main>
   );
 }
 
 export default App;
+
+//23:07
