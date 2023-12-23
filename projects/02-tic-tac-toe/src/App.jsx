@@ -54,6 +54,10 @@ function App() {
     return null
   }
 
+  const checkEndGame = (boardToCheck) => {
+    return boardToCheck.every((square) => square != null)
+  }
+
   const updateBoard = (index) => {
     // Can't change an already selected space
     if(board[index] || winner) return
@@ -72,6 +76,8 @@ function App() {
     const newWinner = checkWinner(newBoard)
     if(newWinner){
       setWinner(newWinner)
+    }else if(checkEndGame(newBoard)){
+      setWinner(false)
     }
   };
 
