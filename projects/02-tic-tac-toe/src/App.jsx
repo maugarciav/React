@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import confetti from "canvas-confetti";
 import "./App.css";
 import "./index.css";
@@ -40,7 +40,7 @@ function App() {
     //Guardar partida
     saveGameToStorage({
       board: newBoard,
-      turn: newTurn
+      turn: newTurn,
     });
 
     //Look for winner
