@@ -1,7 +1,7 @@
 export function App () {
   return (
     <h1>
-      App de Tectica rapida de mika lafuente
+      App 
     </h1>
   )
 }
