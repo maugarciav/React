@@ -8,14 +8,8 @@ main {
   font-family: system-ui;
 }
 
-section{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
 
-section img {
-  max-width: 200px;
+img {
+  max-width: 400px;
   height: auto;
 }

@@ -15,21 +15,23 @@ export function App() {
       .then(res => res.json())
       .then(data => {
         const {fact} = data
-        setFact(fact)
-
-        const firstWord = fact.split(' ', 3).join(' ')
-
-        setImageUrl(`https://cataas.com/cat/says/${firstWord}?fontSize=50&fontColor=white`)
+        setFact(fact)    
       })
   },[])
+
+  useEffect(() =>{
+    if(!fact) return
+    
+    const firstWord = fact.split(' ', 3).join(' ')
+    setImageUrl(`https://cataas.com/cat/says/${firstWord}?fontSize=50&fontColor=white`)
+  
+  }, [fact])
 
   return (
     <main>
       <h1>App</h1>
-      <section>
       {fact && <p>{fact}</p>}
       {imageUrl && <img src={imageUrl} alt={`Image from first word of ${fact}`} />}
-      </section>
     </main>
   );
 }
