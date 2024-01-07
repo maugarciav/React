@@ -6,13 +6,18 @@ const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact'
 
 export function App() {
   const [fact, setFact] = useState()
-  const [imageUrl, setImageUrl] = useState(null)
+  const [imageUrl, setImageUrl] = useState()
+  const [factError, setFactError] = useState()
 
 
   //Pensando que no se puede usar axios.
   useEffect(() => {
     fetch(CAT_ENDPOINT_RANDOM_FACT)
-      .then(res => res.json())
+      .then(res => {
+        if(!res.ok) setFactError('Error en la peticion')
+        
+        return res.json()
+      })
       .then(data => {
         const {fact} = data
         setFact(fact)    
