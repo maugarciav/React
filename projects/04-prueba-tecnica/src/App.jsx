@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css'
 
-
 const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact'
 
 export function App() {
@@ -9,12 +8,11 @@ export function App() {
   const [imageUrl, setImageUrl] = useState()
   const [factError, setFactError] = useState()
 
-
   //Pensando que no se puede usar axios.
   useEffect(() => {
     fetch(CAT_ENDPOINT_RANDOM_FACT)
       .then(res => {
-        if(!res.ok) setFactError('Error en la peticion')
+        if(!res.ok)setFactError('Error en la peticion')
         
         return res.json()
       })
@@ -24,9 +22,8 @@ export function App() {
       })
   },[])
 
-  useEffect(() =>{
+  useEffect(() => {
     if(!fact) return
-    
     const firstWord = fact.split(' ', 3).join(' ')
     setImageUrl(`https://cataas.com/cat/says/${firstWord}?fontSize=50&fontColor=white`)
   
