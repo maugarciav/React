@@ -1,38 +1,22 @@
 import { useEffect, useState } from 'react';
 import './App.css'
-
-const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact'
+import { getRandomFact } from './services/facts'
+import { useCatImage } from './hooks/useCatImage';
 
 export function App() {
   const [fact, setFact] = useState()
-  const [imageUrl, setImageUrl] = useState()
-  const [factError, setFactError] = useState()
+  const {imageUrl} = useCatImage({fact})
 
-  const getRandomFact = () => {
-    fetch(CAT_ENDPOINT_RANDOM_FACT)
-    .then(res => {
-      if(!res.ok)setFactError('Error en la peticion')
-      
-      return res.json()
-    })
-    .then(data => {
-      const {fact} = data
-      setFact(fact)    
-    })
-  }
 
   //Pensando que no se puede usar axios.
-  useEffect(getRandomFact, [])
-
   useEffect(() => {
-    if(!fact) return
-    const firstWord = fact.split(' ', 3).join(' ')
-    setImageUrl(`https://cataas.com/cat/says/${firstWord}?fontSize=50&fontColor=white`)
-  
-  }, [fact])
+    getRandomFact().then(newFact => setFact(newFact))
+  },[])
 
-  const handleClick = () => {
-    getRandomFact()
+
+  const handleClick = async () => {
+    const newFact = await getRandomFact()
+    setFact(newFact)
   }
 
   return (
