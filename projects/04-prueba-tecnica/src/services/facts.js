@@ -5,5 +5,4 @@ export const getRandomFact = async () => {
   const data = await res.json()
   const {fact} = data
   return fact
-
 }

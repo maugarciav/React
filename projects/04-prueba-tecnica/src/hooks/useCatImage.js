@@ -10,8 +10,6 @@ export function useCatImage({fact}){
     const firstWord = fact.split(' ', 3).join(' ')
     const imageUrl = `${CAT_PREFIX_IMAGE_URL}/cat/says/${firstWord}?fontSize=50&fontColor=white`
     setImageUrl(imageUrl)
-  
   }, [fact])
-
   return {imageUrl}
 }

@@ -9,6 +9,5 @@ export function useCatFact(){
   }
 
   useEffect(refreshFact, [])
-
-  return {fact, refreshFact}
+{fact, refreshFact}
 }
